@@ -26,8 +26,8 @@ dependencies {
 	implementation 'io.cucumber:cucumber-spring:7.9.0'
 	implementation 'io.swagger.core.v3:swagger-annotations:2.2.7'
 	implementation 'org.modelmapper:modelmapper:3.1.0'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
-	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.11'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.12'
 
 	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.18.1'
 	implementation 'org.apache.camel.springboot:camel-jackson-starter:3.18.0'

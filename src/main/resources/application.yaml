@@ -23,7 +23,3 @@ spring:
       hibernate:
         temp.use_jdbc_metadata_defaults: false
         format_sql: true
-logging:
-  level:
-    org.mongodb.driver.cluster: off
-    co.infoprice: debug
