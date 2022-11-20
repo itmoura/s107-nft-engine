@@ -1,0 +1,31 @@
+api:
+  name: 'API: @project.name@'
+  description: '@project.description@'
+  version: '@project.version@'
+server:
+  port: 0
+  servlet:
+    context-path: /ipa-pricing-engine
+spring:
+  application:
+    name: ipa-pricing-engine
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: root
+    hikari:
+      schema: test
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+    properties:
+      hibernate:
+        temp.use_jdbc_metadata_defaults: false
+        format_sql: true
+logging:
+  level:
+    org.mongodb.driver.cluster: off
+    co.infoprice: debug
