@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -77,7 +78,12 @@ public class NFTService {
         var nft = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NFT not found"));
 
-        nft.setOwner_id(newOwner);
+        nft.setOwnerId(newOwner);
         return modelMapper.map(repository.save(nft), NFTDTO.class);
+    }
+
+    public List<NFTDTO> findAllByOwnerId(UUID id) {
+        var modelMapper = new ModelMapper();
+        return modelMapper.map(repository.findAllByOwnerId(id), List.class);
     }
 }

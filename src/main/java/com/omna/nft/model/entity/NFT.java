@@ -58,8 +58,8 @@ public class NFT {
     @JoinColumn(name = "collection_id", referencedColumnName = "collection_id")
     private CollectionsNFT collectionsNft;
 
-    @Column
-    private UUID owner_id;
+    @Column(name = "owner_id")
+    private UUID ownerId;
 
     @Column
     private Status status;

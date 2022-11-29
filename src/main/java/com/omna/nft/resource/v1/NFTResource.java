@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -74,6 +75,15 @@ public class NFTResource {
     @ApiResponse(responseCode = "200", description = "Retorna o NFTs")
     public Page<NFTDTO> findAll(Pageable pageable) {
         return service.findAll(pageable);
+    }
+
+    @GetMapping("/me/{id}")
+    @ResponseStatus(OK)
+    @Operation(summary = "Listagem de NFTs",
+            description = "Endpoint responsável por listar NFTs")
+    @ApiResponse(responseCode = "200", description = "Retorna o NFTs")
+    public List<NFTDTO> findAllByOwnerId(@PathVariable UUID id) {
+        return service.findAllByOwnerId(id);
     }
 
     @PostMapping("/{id}/buy")
