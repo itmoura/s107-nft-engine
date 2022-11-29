@@ -71,4 +71,13 @@ public class NFTService {
         var find = repository.findAll(pageable);
         return new PageImpl<>(find.map(nft -> modelMapper.map(nft, NFTDTO.class)).getContent(), pageable, find.getTotalElements());
     }
+
+    public NFTDTO buy(UUID id, UUID newOwner) {
+        var modelMapper = new ModelMapper();
+        var nft = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NFT not found"));
+
+        nft.setOwner_id(newOwner);
+        return modelMapper.map(repository.save(nft), NFTDTO.class);
+    }
 }
