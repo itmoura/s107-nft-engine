@@ -77,13 +77,13 @@ public class NFTResource {
         return service.findAll(pageable);
     }
 
-    @GetMapping("/me/{id}")
+    @GetMapping("/me/{ownerId}")
     @ResponseStatus(OK)
     @Operation(summary = "Listagem de NFTs",
             description = "Endpoint responsável por listar NFTs")
     @ApiResponse(responseCode = "200", description = "Retorna o NFTs")
-    public List<NFTDTO> findAllByOwnerId(@PathVariable UUID id) {
-        return service.findAllByOwnerId(id);
+    public List<NFTDTO> findAllByOwnerId(@PathVariable UUID ownerId) {
+        return service.findAllByOwnerId(ownerId);
     }
 
     @PostMapping("/{id}/buy")
