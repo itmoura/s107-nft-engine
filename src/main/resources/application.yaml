@@ -11,7 +11,7 @@ spring:
     name: nft-engine
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/
+    url: jdbc:postgresql://postgres:5432/
     username: postgres
     password: root
   jpa:
