@@ -10,7 +10,6 @@ spring:
   application:
     name: nft-engine
   datasource:
-    platform: postgres
     url: jdbc:postgresql://postgres:5432/
     username: postgres
     password: root
@@ -23,3 +22,6 @@ spring:
       hibernate:
         temp.use_jdbc_metadata_defaults: false
         format_sql: true
+  sql:
+    init:
+      platform: postgres
