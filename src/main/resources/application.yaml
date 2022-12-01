@@ -7,12 +7,10 @@ server:
   servlet:
     context-path: /nft-engine
 spring:
+  profiles:
+    active: prod
   application:
     name: nft-engine
-  datasource:
-    url: jdbc:postgresql://postgres:5432/
-    username: postgres
-    password: root
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
@@ -25,3 +23,21 @@ spring:
   sql:
     init:
       platform: postgres
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://postgres:5432/
+    username: postgres
+    password: root
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: root
