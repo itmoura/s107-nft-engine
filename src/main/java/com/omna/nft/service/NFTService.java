@@ -3,6 +3,7 @@ package com.omna.nft.service;
 import com.omna.nft.model.dto.CreateNFTDTO;
 import com.omna.nft.model.dto.NFTDTO;
 import com.omna.nft.model.entity.NFT;
+import com.omna.nft.model.enumeration.Status;
 import com.omna.nft.repository.CollectionsNFTRepository;
 import com.omna.nft.repository.NFTRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +49,7 @@ public class NFTService {
         nftdto.setCollectionId(nft.getCollectionsNft().getCollectionId());
         nftdto.setCreated_by(nft.getCreated_by());
         nftdto.setCreated_at(nft.getCreated_at());
-        modelMapper.map(nft, nftdto);
+        modelMapper.map(nftdto, nft);
 
         return modelMapper.map(repository.save(nft), NFTDTO.class);
     }
@@ -79,11 +81,30 @@ public class NFTService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NFT not found"));
 
         nft.setOwnerId(newOwner);
+        nft.setStatus(Status.SOLD);
         return modelMapper.map(repository.save(nft), NFTDTO.class);
     }
 
     public List<NFTDTO> findAllByOwnerId(UUID id) {
         var modelMapper = new ModelMapper();
         return modelMapper.map(repository.findAllByOwnerId(id), List.class);
+    }
+
+    public NFTDTO changeStatusNFT(UUID id, Status status) {
+        var modelMapper = new ModelMapper();
+        var nft = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NFT not found"));
+
+        nft.setStatus(status);
+        return modelMapper.map(repository.save(nft), NFTDTO.class);
+    }
+
+    public NFTDTO changePriceNFT(UUID id, BigDecimal price) {
+        var modelMapper = new ModelMapper();
+        var nft = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "NFT not found"));
+
+        nft.setPrice(price);
+        return modelMapper.map(repository.save(nft), NFTDTO.class);
     }
 }
